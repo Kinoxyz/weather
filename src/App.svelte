@@ -1,5 +1,16 @@
 <script lang="ts">
-  import Greet from './lib/Greet.svelte'
+  import { onMount } from "svelte";
+  import Greet from "./lib/Greet.svelte";
+  import { invoke } from "@tauri-apps/api/tauri";
+
+  onMount(() => {
+    fetchWeatherData();
+  });
+
+  async function fetchWeatherData() {
+    let data = await invoke("get_weather_data");
+    console.log(data);
+  }
 </script>
 
 <main class="container">
@@ -17,15 +28,11 @@
     </a>
   </div>
 
-  <p>
-    Click on the Tauri, Vite, and Svelte logos to learn more.
-  </p>
+  <p>Click on the Tauri, Vite, and Svelte logos to learn more.</p>
 
   <div class="row">
     <Greet />
   </div>
-
-
 </main>
 
 <style>
