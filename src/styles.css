@@ -16,7 +16,7 @@
 
 .container {
   margin: 0;
-  padding-top: 10vh;
+  padding-top: 0vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -85,6 +85,10 @@ button {
 }
 
 #greet-input {
+  margin-right: 5px;
+}
+
+#location-input {
   margin-right: 5px;
 }
 
