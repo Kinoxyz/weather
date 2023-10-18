@@ -1,17 +1,14 @@
 <script lang="ts">
-  import { invoke } from "@tauri-apps/api/tauri";
+  export let fetchWeatherData: (location: string) => Promise<void>;
+  export let location: string;
 
-  let data = {};
-  let location = "";
-
-  async function fetchWeatherData() {
-    data = await invoke("get_weather_data", { location });
-    console.log(data);
+  async function handleSubmit() {
+    fetchWeatherData(location);
   }
 </script>
 
 <div>
-  <form class="row" on:submit|preventDefault={fetchWeatherData}>
+  <form class="row" on:submit|preventDefault={handleSubmit}>
     <input
       id="location-input"
       placeholder="Enter a location..."
