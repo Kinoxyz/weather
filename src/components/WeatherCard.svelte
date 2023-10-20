@@ -1,5 +1,5 @@
-<script>
-  export let data; // Weather data
+<script lang="ts">
+  export let data: any; // Weather data
   let widgets = [1, 2, 3]; // Widgets for the top row
   let largeWidget = 4; // Large widget for the bottom
 </script>
@@ -14,7 +14,9 @@
   </div>
   <div class="large-widget">
     <p>
-      Temperature at 00:00 : {JSON.stringify(data.hourly.temperature_2m[0])}
+      Current temperature : {Object.keys(data).length === 0
+        ? 0
+        : JSON.stringify(data.current.temperature_2m)}
     </p>
   </div>
 </div>

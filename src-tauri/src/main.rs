@@ -14,7 +14,7 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-async fn get_weather_data(location: &str) -> Result<CurrentWeatherResponse, String> {
+async fn get_weather_data(_location: &str) -> Result<CurrentWeatherResponse, String> {
     //TODO: fetch weather with location
     let data = fetch_basic_weather_data().await;
     match data {
