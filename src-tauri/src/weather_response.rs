@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
-pub struct WeatherResponse {
+pub struct ForecastWeatherResponse {
     latitude: f64,
     longitude: f64,
     generationtime_ms: f64,

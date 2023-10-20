@@ -4,7 +4,7 @@
 pub mod api;
 pub mod weather_response;
 
-use crate::weather_response::WeatherResponse;
+use crate::weather_response::ForecastWeatherResponse;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
@@ -13,7 +13,7 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-async fn get_weather_data() -> WeatherResponse {
+async fn get_weather_data() -> ForecastWeatherResponse {
     let data = api::fetch_basic_weather_data().await;
     match data {
         Ok(response) => return response,
