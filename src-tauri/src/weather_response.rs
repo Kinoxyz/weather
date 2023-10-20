@@ -46,8 +46,8 @@ pub struct CurrentUnits {
     interval: String,
     #[serde(rename = "temperature_2m")]
     temperature_2_m: String,
-    #[serde(rename = "windspeed_2m")]
-    windspeed_2_m: String,
+    #[serde(rename = "windspeed_10m")]
+    windspeed_10_m: String,
     weathercode: String
 }
 
@@ -57,7 +57,7 @@ pub struct Current {
     interval: f64,
     #[serde(rename = "temperature_2m")]
     temperature_2_m: f64,
-    #[serde(rename = "windspeed_2m")]
-    windspeed_2_m: f64,
+    #[serde(rename = "windspeed_10m")]
+    windspeed_10_m: f64,
     weathercode: f64
 }

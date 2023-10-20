@@ -8,7 +8,7 @@
   });
 
   async function fetchWeatherData() {
-    let data = await invoke("get_weather_data");
+    let data: any = await invoke("get_weather_data");
     console.log(data);
   }
 </script>
