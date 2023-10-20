@@ -1,4 +1,4 @@
-use crate::weather_response::CurrentWeatherResponse;
+use crate::models::weather_response::CurrentWeatherResponse;
 
 const API_URL: &str =
     "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,windspeed_10m,weathercode&timezone=Europe%2FBerlin";
