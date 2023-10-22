@@ -1,3 +1,4 @@
+use ts_rs::TS;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
@@ -27,7 +28,8 @@ pub struct HourlyUnits {
     temperature_2_m: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, TS)]
+#[ts(export, export_to = "../src/bindings/")]
 pub struct CurrentWeatherResponse {
     latitude: f64,
     longitude: f64,
@@ -40,7 +42,8 @@ pub struct CurrentWeatherResponse {
     current: Current
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, TS)]
+#[ts(export, export_to = "../src/bindings/")]
 pub struct CurrentUnits {
     time: String,
     interval: String,
@@ -51,7 +54,8 @@ pub struct CurrentUnits {
     weathercode: String
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, TS)]
+#[ts(export, export_to = "../src/bindings/")]
 pub struct Current {
     time: String,
     interval: f64,
