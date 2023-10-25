@@ -14,16 +14,18 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-async fn get_weather_data() -> CurrentWeatherResponse {
+async fn get_weather_data(_location: &str) -> Result<CurrentWeatherResponse, String> {
+    //TODO: fetch weather with location
     let data = fetch_basic_weather_data().await;
     match data {
-        Ok(response) => return response,
+        Ok(response) => Ok(response),
         Err(error) => {
             println!("{error}");
             todo!();
         }
     }
 }
+
 
 fn main() {
     tauri::Builder::default()
