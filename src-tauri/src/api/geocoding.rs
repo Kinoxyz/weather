@@ -4,11 +4,13 @@ use anyhow::Result;
 use crate::models::geocoding::{GeocodingResponse, GeocodingResult};
 
 fn construct_api_url(location: &str) -> String {
-    return format!("https://geocoding-api.open-meteo.com/v1/search?\
+    format!(
+        "https://geocoding-api.open-meteo.com/v1/search?\
     name={location}&\
     count=1&\
     language=en&\
-    format=json");
+    format=json"
+    )
 }
 
 pub async fn get_coordinates(location: &str) -> Result<GeocodingResult> {
@@ -21,8 +23,8 @@ pub async fn get_coordinates(location: &str) -> Result<GeocodingResult> {
         .results
         .pop();
 
-    return match response {
+    match response {
         Some(result) => Ok(result),
         None => Err(anyhow!("Coordinates missing")),
-    };
+    }
 }
