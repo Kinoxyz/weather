@@ -22,7 +22,7 @@ async fn get_weather_data(_location: &str) -> Result<CurrentWeatherResponse, ()>
     match data {
         Ok(response) => Ok(response),
         Err(error) => {
-            println!("{error}");
+            eprintln!("{error}");
             Err(())
         }
     }
