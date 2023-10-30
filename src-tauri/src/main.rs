@@ -4,8 +4,8 @@
 pub mod api;
 pub mod models;
 
-use crate::models::weather_response::CurrentWeatherResponse;
 use crate::api::weather_api::fetch_basic_weather_data;
+use crate::models::weather_response::CurrentWeatherResponse;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
@@ -14,18 +14,19 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-async fn get_weather_data(_location: &str) -> Result<CurrentWeatherResponse, String> {
-    //TODO: fetch weather with location
-    let data = fetch_basic_weather_data().await;
+async fn get_weather_data(_location: &str) -> Result<CurrentWeatherResponse, ()> {
+    let Ok(geocoding_result) = api::geocoding::get_coordinates(_location).await else {
+        return Err(());
+    };
+    let data = fetch_basic_weather_data(geocoding_result).await;
     match data {
         Ok(response) => Ok(response),
         Err(error) => {
-            println!("{error}");
-            todo!();
+            eprintln!("{error}");
+            Err(())
         }
     }
 }
-
 
 fn main() {
     tauri::Builder::default()

@@ -4116,6 +4116,7 @@ checksum = "ca6ad05a4870b2bf5fe995117d3728437bd27d7cd5f06f13c17443ef369775a1"
 name = "weather"
 version = "0.0.0"
 dependencies = [
+ "anyhow",
  "reqwest",
  "serde",
  "serde_json",
