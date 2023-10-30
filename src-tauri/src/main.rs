@@ -4,6 +4,7 @@
 pub mod api;
 pub mod models;
 
+use std::collections::HashMap;
 use crate::api::weather_api::fetch_basic_weather_data;
 use crate::models::weather_response::CurrentWeatherResponse;
 
@@ -15,7 +16,7 @@ fn greet(name: &str) -> String {
 
 #[tauri::command]
 async fn get_wmo_codes() -> HashMap<i32, String> {
-    create_wmo_code_map()
+    models::wmo_code::create_wmo_code_map()
 }
 
 #[tauri::command]
