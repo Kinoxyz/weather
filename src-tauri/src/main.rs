@@ -14,6 +14,11 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
+async fn get_wmo_codes() -> HashMap<i32, String> {
+    create_wmo_code_map()
+}
+
+#[tauri::command]
 async fn get_weather_data(_location: &str) -> Result<CurrentWeatherResponse, ()> {
     let Ok(geocoding_result) = api::geocoding::get_coordinates(_location).await else {
         return Err(());
