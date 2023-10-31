@@ -36,7 +36,7 @@ async fn get_weather_data(_location: &str) -> Result<CurrentWeatherResponse, ()>
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet, get_weather_data])
+        .invoke_handler(tauri::generate_handler![greet, get_weather_data, get_wmo_codes])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
