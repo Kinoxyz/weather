@@ -4,6 +4,7 @@
 pub mod api;
 pub mod models;
 
+use std::collections::HashMap;
 use crate::api::weather_api::fetch_basic_weather_data;
 use crate::models::weather_response::CurrentWeatherResponse;
 
@@ -11,6 +12,11 @@ use crate::models::weather_response::CurrentWeatherResponse;
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
+}
+
+#[tauri::command]
+async fn get_wmo_codes() -> HashMap<i32, String> {
+    models::wmo_code::create_wmo_code_map()
 }
 
 #[tauri::command]
@@ -30,7 +36,7 @@ async fn get_weather_data(_location: &str) -> Result<CurrentWeatherResponse, ()>
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet, get_weather_data])
+        .invoke_handler(tauri::generate_handler![greet, get_weather_data, get_wmo_codes])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
