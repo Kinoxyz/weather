@@ -1,6 +1,7 @@
 <script lang="ts">
   export let data: any; // Weather data
   export let wmoCodeDescription: String;
+  export let temperatureUnit: String = "°C"
   let widgets = [1, 2, 3]; // Widgets for the top row
   let largeWidget = 4; // Large widget for the bottom
 </script>
@@ -11,7 +12,7 @@
       <h1>
         {Object.keys(data).length === 0
         ? ""
-        : JSON.stringify(data.current.temperature_2m)}
+        : JSON.stringify(data.current.temperature_2m) + temperatureUnit}
       </h1>
       <br>
       {wmoCodeDescription}  

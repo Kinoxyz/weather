@@ -9,7 +9,10 @@ use crate::models::weather_response::CurrentWeatherResponse;
 
 #[tauri::command]
 async fn get_wmo_code_description(code: i32) -> String {
-    models::wmo_code::create_wmo_code_map()[&code].clone()
+    models::wmo_code::create_wmo_code_map()
+    .get(&code)
+    .unwrap_or(&String::from("Error retrieving WMO code description"))
+    .to_owned()
 }
 
 #[tauri::command]
