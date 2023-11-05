@@ -4,12 +4,15 @@
   import Footer from "./components/Footer.svelte";
   import { invoke } from "@tauri-apps/api/tauri";
 
-  let data = {};
+  let weatherData: any = {};
+  let wmoCodeDescription = "";
   let location = "";
 
   async function fetchWeatherData(location: string) {
-    data = await invoke("get_weather_data", { location });
-    console.log(data);
+    weatherData = await invoke("get_weather_data", { location });
+    console.log(weatherData);
+    let wmoCode = weatherData?.current.weathercode
+    wmoCodeDescription = await invoke("get_wmo_code_description", { code: wmoCode });
   }
 </script>
 
@@ -19,7 +22,7 @@
       <LocationInputField {fetchWeatherData} {location} />
     </div>
     <div class="row">
-      <WeatherCard {data} />
+      <WeatherCard data={weatherData} {wmoCodeDescription} />
     </div>
   </main>
   <Footer />

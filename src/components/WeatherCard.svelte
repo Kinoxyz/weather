@@ -1,22 +1,31 @@
 <script lang="ts">
   export let data: any; // Weather data
+  export let wmoCodeDescription: String;
   let widgets = [1, 2, 3]; // Widgets for the top row
   let largeWidget = 4; // Large widget for the bottom
 </script>
 
 <div class="card">
   <div class="grid">
-    {#each widgets as widget (widget)}
-      <div class="widget">
-        <!-- Create widgets here -->
-      </div>
-    {/each}
+    <div class="widget">
+      <h1>
+        {Object.keys(data).length === 0
+        ? ""
+        : JSON.stringify(data.current.temperature_2m)}
+      </h1>
+      <br>
+      {wmoCodeDescription}  
+    </div>
+    <div class="widget">
+
+    </div>
+    <div class="widget">
+
+    </div>
   </div>
   <div class="large-widget">
     <p>
-      Current temperature : {Object.keys(data).length === 0
-        ? 0
-        : JSON.stringify(data.current.temperature_2m)}
+
     </p>
   </div>
 </div>
@@ -49,7 +58,6 @@
     padding: 10px;
     text-align: center;
     color: #fff;
-    font-weight: bold;
     margin-bottom: 5px;
   }
 
