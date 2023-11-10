@@ -36,10 +36,7 @@
         "windows": [
             {
                 "fullscreen": false,
-                "resizable": false,
-                "title": "Weather App",
-                "width": 800,
-                "height": 600
+                "title": "Weather App"
             }
         ]
     }

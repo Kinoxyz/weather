@@ -34,7 +34,8 @@
     .flex-container {
         display: flex;
         flex-direction: column;
-        min-height: 50%;
+        width: 100%;
+        height: 100%;
     }
     .container {
         display: flex;
