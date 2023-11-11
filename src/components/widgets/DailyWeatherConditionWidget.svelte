@@ -4,14 +4,16 @@
 </script>
 
 <div class="widget">
-    <h4>High:</h4>
-    <h1>
-        {JSON.stringify(data.daily.temperature_2m_max[0]) + temperatureUnit}
-    </h1>
-    <h4>Low:</h4>
-    <h1>
-        {JSON.stringify(data.daily.temperature_2m_min[0]) + temperatureUnit}
-    </h1>
+    {#if Object.keys(data).length !== 0}
+        <h4>High:</h4>
+        <h1>
+            {JSON.stringify(data.daily.temperature_2m_max[0]) + temperatureUnit}
+        </h1>
+        <h4>Low:</h4>
+        <h1>
+            {JSON.stringify(data.daily.temperature_2m_min[0]) + temperatureUnit}
+        </h1>
+    {/if}
 </div>
 
 <style>

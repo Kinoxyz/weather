@@ -5,13 +5,13 @@
 </script>
 
 <div class="widget">
-    <h1>
-        {Object.keys(data).length === 0
-            ? ""
-            : JSON.stringify(data.current.temperature_2m) + temperatureUnit}
-    </h1>
-    <br />
-    {wmoCodeDescription}
+    {#if Object.keys(data).length !== 0}
+        <h1>
+            {JSON.stringify(data.current.temperature_2m) + temperatureUnit}
+        </h1>
+        <br />
+        {wmoCodeDescription}
+    {/if}
 </div>
 
 <style>
