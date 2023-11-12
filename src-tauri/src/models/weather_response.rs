@@ -39,7 +39,9 @@ pub struct CurrentWeatherResponse {
     timezone_abbreviation: String,
     elevation: f64,
     current_units: CurrentUnits,
-    current: Current
+    current: Current,
+    daily_units: DailyUnits,
+    daily: Daily
 }
 
 #[derive(Serialize, Deserialize, TS)]
@@ -64,4 +66,24 @@ pub struct Current {
     #[serde(rename = "windspeed_10m")]
     windspeed_10_m: f64,
     weathercode: f64
+}
+
+#[derive(Serialize, Deserialize, TS)]
+#[ts(export, export_to = "../src/bindings/")]
+pub struct DailyUnits {
+    time: String,
+    #[serde(rename = "temperature_2m_max")]
+    temperature_2_m_max: String,
+    #[serde(rename = "temperature_2m_min")]
+    temperature_2_m_min: String
+}
+
+#[derive(Serialize, Deserialize, TS)]
+#[ts(export, export_to = "../src/bindings/")]
+pub struct Daily {
+    time: Vec<String>,
+    #[serde(rename = "temperature_2m_max")]
+    temperature_2_m_max: Vec<f64>,
+    #[serde(rename = "temperature_2m_min")]
+    temperature_2_m_min: Vec<f64>
 }
