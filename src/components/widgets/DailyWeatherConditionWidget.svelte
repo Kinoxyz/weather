@@ -1,5 +1,7 @@
 <script lang="ts">
-    export let data: any;
+    import type { CurrentWeatherResponse } from "../../bindings/CurrentWeatherResponse";
+
+    export let data: CurrentWeatherResponse;
     export let temperatureUnit: String;
 </script>
 

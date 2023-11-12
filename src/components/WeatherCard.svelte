@@ -1,7 +1,8 @@
 <script lang="ts">
+    import type { CurrentWeatherResponse } from "../bindings/CurrentWeatherResponse";
     import CurrentWeatherConditionWidget from "./widgets/CurrentWeatherConditionWidget.svelte";
     import DailyWeatherConditionWidget from "./widgets/DailyWeatherConditionWidget.svelte";
-    export let data: any; // Weather data
+    export let data: CurrentWeatherResponse; // Weather data
     export let wmoCodeDescription: String;
     export let temperatureUnit: String = "°C";
 </script>
