@@ -38,9 +38,11 @@
 
 <style>
     /* filter from https://isotropic.co/tool/hex-color-to-css-filter/ */
-    img {
-        filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(26deg) brightness(106%) contrast(101%);
-    }
+	@media (prefers-color-scheme:dark) {
+		img {
+			filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(26deg) brightness(106%) contrast(101%);
+		}
+	}
 
     button {
         margin-right: 1em;
