@@ -2,6 +2,7 @@
     import type { CurrentWeatherResponse } from "../bindings/CurrentWeatherResponse";
     import CurrentWeatherConditionWidget from "./widgets/CurrentWeatherConditionWidget.svelte";
     import DailyWeatherConditionWidget from "./widgets/DailyWeatherConditionWidget.svelte";
+	import TomorrowWeatherConditionWidget from "./widgets/TomorrowWeatherConditionWidget.svelte";
     export let data: CurrentWeatherResponse; // Weather data
     export let wmoCodeDescription: String;
     export let temperatureUnit: String = "°C";
@@ -15,7 +16,7 @@
             {wmoCodeDescription}
         />
         <DailyWeatherConditionWidget {data} {temperatureUnit} />
-        <div class="widget" />
+        <TomorrowWeatherConditionWidget {data} {temperatureUnit} />
     </div>
     <div class="large-widget">
         <p />
@@ -36,22 +37,12 @@
         flex-direction: column;
     }
 
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 10px;
-        flex: 1;
-    }
-
-    .widget {
-        background-color: #3498db;
-        border: 1px solid #2979ac;
-        border-radius: 5px;
-        padding: 10px;
-        text-align: center;
-        color: #fff;
-        margin-bottom: 5px;
-    }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    flex: 1;
+  }
 
     .large-widget {
         background-color: #3498db;
