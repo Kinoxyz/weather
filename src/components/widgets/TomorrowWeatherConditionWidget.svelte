@@ -1,7 +1,8 @@
 <script lang="ts">
     import type {CurrentWeatherResponse} from "../../bindings/CurrentWeatherResponse";
+    import {temperatureUnit} from "../../stores";
+    import {getTemperatureString} from "../../models/Temperature";
 
-    export let temperatureUnit: String;
     export let data: CurrentWeatherResponse;
 </script>
 
@@ -9,11 +10,11 @@
     {#if Object.keys(data).length !== 0}
         <div class="label">Tomorrow High:</div>
         <div class= "temperature-text">
-            {JSON.stringify(data.daily.temperature_2m_max[1]) + temperatureUnit}
+            {getTemperatureString(data.daily.temperature_2m_max[1], $temperatureUnit)}
         </div>
         <div class="label">Tomorrow Low:</div>
         <div class= "temperature-text">
-            {JSON.stringify(data.daily.temperature_2m_min[1]) + temperatureUnit}
+            {getTemperatureString(data.daily.temperature_2m_min[1], $temperatureUnit)}
         </div>
     {/if}
 </div>
