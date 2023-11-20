@@ -1,17 +1,18 @@
 <script lang="ts">
-    import type { CurrentWeatherResponse } from "../../bindings/CurrentWeatherResponse";
+    import type {CurrentWeatherResponse} from "../../bindings/CurrentWeatherResponse";
+    import {temperatureUnit} from "../../stores";
+    import {getTemperatureString} from "../../models/Temperature.js";
 
     export let data: CurrentWeatherResponse;
-    export let temperatureUnit: String;
     export let wmoCodeDescription: String;
 </script>
 
 <div class="widget">
     {#if Object.keys(data).length !== 0}
         <div class="temperature-text">
-            {JSON.stringify(data.current.temperature_2m) + temperatureUnit}
+            {getTemperatureString(data.current.temperature_2m, $temperatureUnit)}
         </div>
-        <br />
+        <br/>
         {wmoCodeDescription}
     {/if}
 </div>
