@@ -6,7 +6,7 @@ fn construct_api_url(coordinates: GeocodingResult) -> String {
         longitude,
         latitude,
     } = coordinates;
-    let forecast_days = 1;
+    let forecast_days = 2;
 
     format!(
         "https://api.open-meteo.com/v1/forecast?\

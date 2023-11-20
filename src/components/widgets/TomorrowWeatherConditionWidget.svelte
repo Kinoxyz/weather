@@ -8,18 +8,18 @@
 
 <div class="widget">
     {#if Object.keys(data).length !== 0}
-        <h2>Daily</h2>
+        <h2>Tomorrow</h2>
         <div class="temperature-row">
             <div class="label">High:</div>
             <div class="temperature-text">
-                {getTemperatureString(data.daily.temperature_2m_max[0], $temperatureUnit)}
+                {getTemperatureString(data.daily.temperature_2m_max[1], $temperatureUnit)}
             </div>
         </div>
         <br/>
         <div class="temperature-row">
             <div class="label">Low:</div>
             <div class="temperature-text">
-                {getTemperatureString(data.daily.temperature_2m_min[0], $temperatureUnit)}
+                {getTemperatureString(data.daily.temperature_2m_min[1], $temperatureUnit)}
             </div>
         </div>
     {/if}
