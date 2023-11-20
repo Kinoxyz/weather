@@ -8,13 +8,19 @@
 
 <div class="widget">
     {#if Object.keys(data).length !== 0}
-        <div class="label">Tomorrow High:</div>
-        <div class= "temperature-text">
-            {getTemperatureString(data.daily.temperature_2m_max[1], $temperatureUnit)}
+        <h2>Tomorrow</h2>
+        <div class="temperature-row">
+            <div class="label">High:</div>
+            <div class="temperature-text">
+                {getTemperatureString(data.daily.temperature_2m_max[1], $temperatureUnit)}
+            </div>
         </div>
-        <div class="label">Tomorrow Low:</div>
-        <div class= "temperature-text">
-            {getTemperatureString(data.daily.temperature_2m_min[1], $temperatureUnit)}
+        <br/>
+        <div class="temperature-row">
+            <div class="label">Low:</div>
+            <div class="temperature-text">
+                {getTemperatureString(data.daily.temperature_2m_min[1], $temperatureUnit)}
+            </div>
         </div>
     {/if}
 </div>
@@ -28,18 +34,28 @@
         color: #fff;
         margin-bottom: 5px;
         display: flex;
-        flex-direction: column;      
+        flex-direction: column;  
+        position: relative;    
+    }
+
+
+    .temperature-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-inline: 20px; 
+    }
+
+    .label {
+        font-size: 1em;
+        font-weight: bold;
     }
 
     .temperature-text {
         font-size: 2em;
         font-weight: bold;
     }
-    
-    .label {
-        font-size: 1em;
-        font-weight: bold;
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
 </style>
+
+
