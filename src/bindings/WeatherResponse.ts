@@ -4,7 +4,7 @@ import type { CurrentUnits } from "./CurrentUnits";
 import type { Daily } from "./Daily";
 import type { DailyUnits } from "./DailyUnits";
 
-export interface CurrentWeatherResponse {
+export interface WeatherResponse {
   latitude: number;
   longitude: number;
   generationtime_ms: number;

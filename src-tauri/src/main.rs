@@ -5,7 +5,7 @@ pub mod api;
 pub mod models;
 
 use crate::api::weather_api::fetch_basic_weather_data;
-use crate::models::weather_response::CurrentWeatherResponse;
+use crate::models::weather_response::{WeatherData, Location};
 
 #[tauri::command]
 async fn get_wmo_code_description(code: i32) -> String {
@@ -16,13 +16,22 @@ async fn get_wmo_code_description(code: i32) -> String {
 }
 
 #[tauri::command]
-async fn get_weather_data(_location: &str) -> Result<CurrentWeatherResponse, ()> {
+async fn get_weather_data(_location: &str) -> Result<WeatherData, ()> {
     let Ok(geocoding_result) = api::geocoding::get_coordinates(_location).await else {
         return Err(());
     };
-    let data = fetch_basic_weather_data(geocoding_result).await;
+    let data = fetch_basic_weather_data(&geocoding_result).await;
     match data {
-        Ok(response) => Ok(response),
+        Ok(response) => {
+            let extended_weather_response = WeatherData {
+                weather_response: response,
+                location: Location {
+                    name: geocoding_result.name,
+                    country: geocoding_result.country
+                }
+            };
+            Ok(extended_weather_response)
+        },
         Err(error) => {
             eprintln!("{error}");
             Err(())

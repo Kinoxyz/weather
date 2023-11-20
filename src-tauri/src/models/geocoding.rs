@@ -8,7 +8,9 @@ pub struct GeocodingResponse {
 
 #[derive(Serialize, Deserialize)]
 pub struct GeocodingResult {
-    // there are more fields for this response, but we only really need the coordinates
+    // there are more fields for this response, but we only really need the coordinates, name and country
     pub latitude: f64,
     pub longitude: f64,
+    pub name: String,
+    pub country: String
 }

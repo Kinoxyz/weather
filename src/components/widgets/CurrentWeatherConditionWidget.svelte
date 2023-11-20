@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type {CurrentWeatherResponse} from "../../bindings/CurrentWeatherResponse";
+    import type {WeatherResponse} from "../../bindings/WeatherResponse";
     import {temperatureUnit} from "../../stores";
     import {getTemperatureString} from "../../models/Temperature.js";
 
-    export let data: CurrentWeatherResponse;
+    export let data: WeatherResponse;
     export let wmoCodeDescription: String;
 </script>
 
