@@ -9,6 +9,7 @@
 
 <div class="widget">
     {#if Object.keys(data).length !== 0}
+        <h2>Current</h2>
         <div class="temperature-text">
             {getTemperatureString(data.current.temperature_2m, $temperatureUnit)}
         </div>
@@ -32,6 +33,5 @@
     .temperature-text {
         font-size: 2em;
         font-weight: bold;
-        margin-top: 25px;
     }
 </style>
