@@ -1,6 +1,6 @@
-# Tauri + Svelte + Typescript
+# Weather App
 
-This template should help get you started developing with Tauri, Svelte and TypeScript in Vite.
+This is a weather app developed with Svelte and Tauri. Both are written in the Typescript and Rust languages respectively. 
 
 ## Recommended IDE Setup
 
