@@ -1,46 +1,51 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import Greet from "./lib/Greet.svelte";
-  import { invoke } from "@tauri-apps/api/tauri";
+    import LocationInputField from "./components/LocationInputField.svelte";
+    import WeatherCard from "./components/WeatherCard.svelte";
+    import Footer from "./components/Footer.svelte";
+    import {invoke} from "@tauri-apps/api/tauri";
+    import SettingsButton from "./components/SettingsButton.svelte";
 
-  onMount(() => {
-    fetchWeatherData();
-  });
+    let weatherData: any = {};
+    let wmoCodeDescription = "";
+    let location = "";
 
-  async function fetchWeatherData() {
-    let data = await invoke("get_weather_data");
-    console.log(data);
-  }
+    async function fetchWeatherData(location: string) {
+        weatherData = await invoke("get_weather_data", {location});
+        console.log(weatherData);
+        let wmoCode = weatherData?.current.weathercode;
+        wmoCodeDescription = await invoke("get_wmo_code_description", {
+            code: wmoCode,
+        });
+    }
 </script>
 
-<main class="container">
-  <h1>Welcome to Tauri!</h1>
-
-  <div class="row">
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo vite" alt="Vite Logo" />
-    </a>
-    <a href="https://tauri.app" target="_blank">
-      <img src="/tauri.svg" class="logo tauri" alt="Tauri Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank">
-      <img src="/svelte.svg" class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-
-  <p>Click on the Tauri, Vite, and Svelte logos to learn more.</p>
-
-  <div class="row">
-    <Greet />
-  </div>
-</main>
+<div class="flex-container">
+    <main class="container">
+        <SettingsButton/>
+        <div class="row">
+            <LocationInputField {fetchWeatherData} {location}/>
+        </div>
+        <div class="row">
+            <WeatherCard data={weatherData} {wmoCodeDescription}/>
+        </div>
+    </main>
+    <Footer/>
+</div>
 
 <style>
-  .logo.vite:hover {
-    filter: drop-shadow(0 0 2em #747bff);
-  }
+    .flex-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
 
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00);
-  }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+        margin: auto;
+    }
 </style>
