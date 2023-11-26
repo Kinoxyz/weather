@@ -7,6 +7,7 @@ import type { Location } from "./Location";
 
 export interface WeatherData {
   location: Location;
+  wmo_code_description: string;
   current_units: CurrentUnits;
   current: Current;
   daily_units: DailyUnits;

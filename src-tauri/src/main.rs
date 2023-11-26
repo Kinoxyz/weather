@@ -8,14 +8,6 @@ use crate::api::weather_api::fetch_basic_weather_data;
 use crate::models::weather_response::{WeatherData, Location};
 
 #[tauri::command]
-async fn get_wmo_code_description(code: i32) -> String {
-    models::wmo_code::create_wmo_code_map()
-    .get(&code)
-    .unwrap_or(&String::from("Error retrieving WMO code description"))
-    .to_owned()
-}
-
-#[tauri::command]
 async fn get_weather_data(_location: &str) -> Result<WeatherData, ()> {
     let Ok(geocoding_result) = api::geocoding::get_coordinates(_location).await else {
         return Err(());
@@ -28,6 +20,7 @@ async fn get_weather_data(_location: &str) -> Result<WeatherData, ()> {
                     name: geocoding_result.name,
                     country: geocoding_result.country
                 },
+                wmo_code_description: models::wmo_code::get_wmo_code_description(response.current.weathercode),
                 current_units: response.current_units,
                 current: response.current,
                 daily_units: response.daily_units,
@@ -44,7 +37,7 @@ async fn get_weather_data(_location: &str) -> Result<WeatherData, ()> {
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![get_weather_data, get_wmo_code_description])
+        .invoke_handler(tauri::generate_handler![get_weather_data])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

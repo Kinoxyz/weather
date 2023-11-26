@@ -54,10 +54,11 @@ pub struct Location {
 #[ts(export, export_to = "../src/bindings/")]
 pub struct WeatherData {
     pub location: Location,
+    pub wmo_code_description: String, 
     pub current_units: CurrentUnits,
     pub current: Current,
     pub daily_units: DailyUnits,
-    pub daily: Daily
+    pub daily: Daily,
 }
 
 #[derive(Serialize, Deserialize, TS)]
@@ -81,7 +82,7 @@ pub struct Current {
     temperature_2_m: f64,
     #[serde(rename = "windspeed_10m")]
     windspeed_10_m: f64,
-    weathercode: f64
+    pub weathercode: i32
 }
 
 #[derive(Serialize, Deserialize, TS)]

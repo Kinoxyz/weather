@@ -5,12 +5,11 @@
 
 	import TomorrowWeatherConditionWidget from "./widgets/TomorrowWeatherConditionWidget.svelte";
   export let data: WeatherData;
-  export let wmoCodeDescription: String;
 </script>
 
 <div class="card">
   <div class="grid">
-    <CurrentWeatherConditionWidget {data} {wmoCodeDescription} />
+    <CurrentWeatherConditionWidget {data} />
     <DailyWeatherConditionWidget {data} />
     <TomorrowWeatherConditionWidget {data} />
   </div>

@@ -4,7 +4,6 @@
     import {getTemperatureString} from "../../models/Temperature.js";
 
     export let data: WeatherData;
-    export let wmoCodeDescription: String;
 </script>
 
 <div class="widget">
@@ -14,7 +13,7 @@
             {getTemperatureString(data.current.temperature_2m, $temperatureUnit)}
         </div>
         <br/>
-        {wmoCodeDescription}
+        {data.wmo_code_description}
     {/if}
 </div>
 

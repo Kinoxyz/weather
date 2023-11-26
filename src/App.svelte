@@ -9,7 +9,6 @@
 	import type { WeatherData } from "./bindings/WeatherData";
 
     let weatherData: any = {};
-    let wmoCodeDescription = "";
     let locationInput = "";
 
     async function fetchWeatherData(location: string) {
@@ -19,11 +18,6 @@
         $currentLocationName = retrievedWeatherData?.location.name;
         $currentLocationCountry = retrievedWeatherData?.location.country;
         weatherData = retrievedWeatherData;
-
-        let wmoCode = retrievedWeatherData.current.weathercode;
-        wmoCodeDescription = await invoke("get_wmo_code_description", {
-            code: wmoCode,
-        });
     }
 </script>
 
@@ -37,7 +31,7 @@
             <CurrentLocationDisplay/>
         </div>
         <div class="row">
-            <WeatherCard data={weatherData} {wmoCodeDescription}/>
+            <WeatherCard data={weatherData}/>
         </div>
     </main>
     <Footer/>

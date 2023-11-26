@@ -1,9 +1,16 @@
 use std::collections::HashMap;
 
+pub fn get_wmo_code_description(code: i32) -> String {
+    create_wmo_code_map()
+    .get(&code)
+    .unwrap_or(&String::from("Error retrieving WMO code description"))
+    .to_owned()
+}
+
 // See https://www.nodc.noaa.gov/archive/arc0021/0002199/1.1/data/0-data/HTML/WMO-CODE/WMO4677.HTM
 // Note: codes 00-49 indicate no precipitation at station at the time of observation,
 // while codes 50-99 indicate precipitation at the time of observation.
-pub fn create_wmo_code_map() -> HashMap<i32, String> {
+fn create_wmo_code_map() -> HashMap<i32, String> {
     let mut wmo_code_map = HashMap::new();
     wmo_code_map.insert(0, "Cloud development not observed or not observable".to_string());
     wmo_code_map.insert(1, "Clouds generally dissolving or becoming less developed".to_string());
