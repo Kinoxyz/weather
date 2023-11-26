@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type { WeatherResponse } from "../bindings/WeatherResponse";
+  import type { WeatherData } from "../bindings/WeatherData";
   import CurrentWeatherConditionWidget from "./widgets/CurrentWeatherConditionWidget.svelte";
   import DailyWeatherConditionWidget from "./widgets/DailyWeatherConditionWidget.svelte";
 
 	import TomorrowWeatherConditionWidget from "./widgets/TomorrowWeatherConditionWidget.svelte";
-  export let data: WeatherResponse; // Weather data
+  export let data: WeatherData;
   export let wmoCodeDescription: String;
 </script>
 

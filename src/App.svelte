@@ -8,19 +8,19 @@
     import { currentLocationName, currentLocationCountry } from './stores';
 	import type { WeatherData } from "./bindings/WeatherData";
 
-    let weatherResponse: any = {};
+    let weatherData: any = {};
     let wmoCodeDescription = "";
     let locationInput = "";
 
     async function fetchWeatherData(location: string) {
-        let weatherData: WeatherData = await invoke("get_weather_data", {location});
-        console.log(weatherData);
+        let retrievedWeatherData: WeatherData = await invoke("get_weather_data", {location});
+        console.log(retrievedWeatherData);
 
-        $currentLocationName = weatherData?.location.name;
-        $currentLocationCountry = weatherData?.location.country;
-        weatherResponse = weatherData?.weather_response;
+        $currentLocationName = retrievedWeatherData?.location.name;
+        $currentLocationCountry = retrievedWeatherData?.location.country;
+        weatherData = retrievedWeatherData;
 
-        let wmoCode = weatherResponse.current.weathercode;
+        let wmoCode = retrievedWeatherData.current.weathercode;
         wmoCodeDescription = await invoke("get_wmo_code_description", {
             code: wmoCode,
         });
@@ -37,7 +37,7 @@
             <CurrentLocationDisplay/>
         </div>
         <div class="row">
-            <WeatherCard data={weatherResponse} {wmoCodeDescription}/>
+            <WeatherCard data={weatherData} {wmoCodeDescription}/>
         </div>
     </main>
     <Footer/>

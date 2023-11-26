@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type {WeatherResponse} from "../../bindings/WeatherResponse";
+    import type {WeatherData} from "../../bindings/WeatherData";
     import {temperatureUnit} from "../../stores";
     import {getTemperatureString} from "../../models/Temperature";
 
-    export let data: WeatherResponse;
+    export let data: WeatherData;
 </script>
 
 <div class="widget">

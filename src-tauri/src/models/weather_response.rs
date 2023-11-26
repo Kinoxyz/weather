@@ -28,9 +28,8 @@ pub struct HourlyUnits {
     temperature_2_m: String,
 }
 
-#[derive(Serialize, Deserialize, TS)]
-#[ts(export, export_to = "../src/bindings/")]
-pub struct WeatherResponse {
+#[derive(Serialize, Deserialize)]
+pub struct WeatherApiResponse {
     latitude: f64,
     longitude: f64,
     generationtime_ms: f64,
@@ -38,10 +37,10 @@ pub struct WeatherResponse {
     timezone: String,
     timezone_abbreviation: String,
     elevation: f64,
-    current_units: CurrentUnits,
-    current: Current,
-    daily_units: DailyUnits,
-    daily: Daily
+    pub current_units: CurrentUnits,
+    pub current: Current,
+    pub daily_units: DailyUnits,
+    pub daily: Daily
 }
 
 #[derive(Serialize, Deserialize, TS)]
@@ -54,8 +53,11 @@ pub struct Location {
 #[derive(Serialize, Deserialize, TS)]
 #[ts(export, export_to = "../src/bindings/")]
 pub struct WeatherData {
-    pub weather_response: WeatherResponse,
-    pub location: Location
+    pub location: Location,
+    pub current_units: CurrentUnits,
+    pub current: Current,
+    pub daily_units: DailyUnits,
+    pub daily: Daily
 }
 
 #[derive(Serialize, Deserialize, TS)]

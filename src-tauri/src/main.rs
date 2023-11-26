@@ -23,14 +23,17 @@ async fn get_weather_data(_location: &str) -> Result<WeatherData, ()> {
     let data = fetch_basic_weather_data(&geocoding_result).await;
     match data {
         Ok(response) => {
-            let extended_weather_response = WeatherData {
-                weather_response: response,
+            let weather_data = WeatherData {
                 location: Location {
                     name: geocoding_result.name,
                     country: geocoding_result.country
-                }
+                },
+                current_units: response.current_units,
+                current: response.current,
+                daily_units: response.daily_units,
+                daily: response.daily
             };
-            Ok(extended_weather_response)
+            Ok(weather_data)
         },
         Err(error) => {
             eprintln!("{error}");

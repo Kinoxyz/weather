@@ -1,4 +1,4 @@
-use crate::models::{geocoding::GeocodingResult, weather_response::WeatherResponse};
+use crate::models::{geocoding::GeocodingResult, weather_response::WeatherApiResponse};
 use anyhow::Result;
 
 fn construct_api_url(coordinates: &GeocodingResult) -> String {
@@ -27,11 +27,11 @@ fn construct_api_url(coordinates: &GeocodingResult) -> String {
 
 pub async fn fetch_basic_weather_data(
     coordinates: &GeocodingResult,
-) -> Result<WeatherResponse> {
+) -> Result<WeatherApiResponse> {
     let api_url = construct_api_url(coordinates);
     let response = reqwest::get(api_url)
         .await?
-        .json::<WeatherResponse>()
+        .json::<WeatherApiResponse>()
         .await?;
     Ok(response)
 }
