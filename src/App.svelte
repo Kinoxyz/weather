@@ -33,7 +33,9 @@
         <div class="row">
             <LocationInputField {fetchWeatherData} {locationInput}/>
         </div>
-        <CurrentLocationDisplay/>
+        <div class="row">
+            <CurrentLocationDisplay/>
+        </div>
         <div class="row">
             <WeatherCard data={weatherResponse} {wmoCodeDescription}/>
         </div>

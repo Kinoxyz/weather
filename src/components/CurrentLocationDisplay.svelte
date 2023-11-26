@@ -3,13 +3,20 @@
 
     function getLocationString(name: String, country: String): String {
         if (!name || !country) {
-          return " "
+          return "<br>"
         } else {
-          return `Current location: ${name}, ${country}`
+          return `<strong>Current location: ${name}, ${country}</strong>`
         }
     }
 </script>
 
-<div>
-    <h2>{getLocationString($currentLocationName, $currentLocationCountry)}</h2>
+<div class=current-location>
+    {@html getLocationString($currentLocationName, $currentLocationCountry) }
 </div>
+
+<style>
+    .current-location {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+</style>

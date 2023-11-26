@@ -27,7 +27,6 @@
     height: 400px;
     min-height: 400px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
