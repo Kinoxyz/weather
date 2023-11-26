@@ -1,17 +1,22 @@
 <script lang="ts">
-    import { currentLocationName, currentLocationCountry } from '../stores';
+    import type {WeatherData} from "../bindings/WeatherData";
+
+    export let data: WeatherData;
 
     function getLocationString(name: String, country: String): String {
-        if (!name || !country) {
-          return "<br>"
-        } else {
-          return `<strong>Current location: ${name}, ${country}</strong>`
-        }
+        return `Current location: ${name}, ${country}`
     }
 </script>
 
 <div class=current-location>
-    {@html getLocationString($currentLocationName, $currentLocationCountry) }
+    {#if Object.keys(data).length === 0}
+        <br>
+    {/if}
+
+    {#if Object.keys(data).length !== 0}
+        <strong>{getLocationString(data.location.name, data.location.country)}</strong>
+    {/if}
+    
 </div>
 
 <style>

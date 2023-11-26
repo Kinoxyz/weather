@@ -5,19 +5,13 @@
     import {invoke} from "@tauri-apps/api/tauri";
     import SettingsButton from "./components/SettingsButton.svelte";
 	import CurrentLocationDisplay from "./components/CurrentLocationDisplay.svelte";
-    import { currentLocationName, currentLocationCountry } from './stores';
-	import type { WeatherData } from "./bindings/WeatherData";
 
     let weatherData: any = {};
     let locationInput = "";
 
     async function fetchWeatherData(location: string) {
-        let retrievedWeatherData: WeatherData = await invoke("get_weather_data", {location});
-        console.log(retrievedWeatherData);
-
-        $currentLocationName = retrievedWeatherData?.location.name;
-        $currentLocationCountry = retrievedWeatherData?.location.country;
-        weatherData = retrievedWeatherData;
+        let weatherData = await invoke("get_weather_data", {location});
+        console.log(weatherData);
     }
 </script>
 
@@ -28,7 +22,7 @@
             <LocationInputField {fetchWeatherData} {locationInput}/>
         </div>
         <div class="row">
-            <CurrentLocationDisplay/>
+            <CurrentLocationDisplay data={weatherData}/>
         </div>
         <div class="row">
             <WeatherCard data={weatherData}/>
