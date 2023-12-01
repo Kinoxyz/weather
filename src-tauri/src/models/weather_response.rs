@@ -61,6 +61,27 @@ pub struct WeatherData {
     pub daily: Daily,
 }
 
+impl WeatherData {
+    pub fn new(
+        weather_api_response: WeatherApiResponse,
+        geocoding_result: crate::models::geocoding::GeocodingResult
+    ) -> WeatherData {
+        use crate::models::wmo_code::get_wmo_code_description;
+
+        WeatherData {
+            location: Location {
+                name: geocoding_result.name,
+                country: geocoding_result.country
+            },
+            wmo_code_description: get_wmo_code_description(weather_api_response.current.weathercode),
+            current_units: weather_api_response.current_units,
+            current: weather_api_response.current,
+            daily_units: weather_api_response.daily_units,
+            daily: weather_api_response.daily
+        }
+    }
+}
+
 #[derive(Serialize, Deserialize, TS)]
 #[ts(export, export_to = "../src/bindings/")]
 pub struct CurrentUnits {
