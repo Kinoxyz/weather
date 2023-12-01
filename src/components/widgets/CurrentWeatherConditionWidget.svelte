@@ -1,10 +1,9 @@
 <script lang="ts">
-    import type {CurrentWeatherResponse} from "../../bindings/CurrentWeatherResponse";
+    import type {WeatherData} from "../../bindings/WeatherData";
     import {temperatureUnit} from "../../stores";
     import {getTemperatureString} from "../../models/Temperature.js";
 
-    export let data: CurrentWeatherResponse;
-    export let wmoCodeDescription: String;
+    export let data: WeatherData;
 </script>
 
 <div class="widget">
@@ -14,7 +13,7 @@
             {getTemperatureString(data.current.temperature_2m, $temperatureUnit)}
         </div>
         <br/>
-        {wmoCodeDescription}
+        {data.wmo_code_description}
     {/if}
 </div>
 

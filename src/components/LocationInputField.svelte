@@ -1,9 +1,9 @@
 <script lang="ts">
   export let fetchWeatherData: (location: string) => Promise<void>;
-  export let location: string;
+  export let locationInput: string;
 
   async function handleSubmit() {
-    fetchWeatherData(location);
+    fetchWeatherData(locationInput);
   }
 </script>
 
@@ -12,7 +12,7 @@
     <input
       id="location-input"
       placeholder="Enter a location..."
-      bind:value={location}
+      bind:value={locationInput}
     />
     <button type="submit">Submit</button>
   </form>

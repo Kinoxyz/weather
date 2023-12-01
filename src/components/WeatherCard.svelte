@@ -1,16 +1,15 @@
 <script lang="ts">
-  import type { CurrentWeatherResponse } from "../bindings/CurrentWeatherResponse";
+  import type { WeatherData } from "../bindings/WeatherData";
   import CurrentWeatherConditionWidget from "./widgets/CurrentWeatherConditionWidget.svelte";
   import DailyWeatherConditionWidget from "./widgets/DailyWeatherConditionWidget.svelte";
 
 	import TomorrowWeatherConditionWidget from "./widgets/TomorrowWeatherConditionWidget.svelte";
-  export let data: CurrentWeatherResponse; // Weather data
-  export let wmoCodeDescription: String;
+  export let data: WeatherData;
 </script>
 
 <div class="card">
   <div class="grid">
-    <CurrentWeatherConditionWidget {data} {wmoCodeDescription} />
+    <CurrentWeatherConditionWidget {data} />
     <DailyWeatherConditionWidget {data} />
     <TomorrowWeatherConditionWidget {data} />
   </div>
@@ -27,7 +26,6 @@
     height: 400px;
     min-height: 400px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;

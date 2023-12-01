@@ -3,15 +3,11 @@ import type { Current } from "./Current";
 import type { CurrentUnits } from "./CurrentUnits";
 import type { Daily } from "./Daily";
 import type { DailyUnits } from "./DailyUnits";
+import type { Location } from "./Location";
 
-export interface CurrentWeatherResponse {
-  latitude: number;
-  longitude: number;
-  generationtime_ms: number;
-  utc_offset_seconds: bigint;
-  timezone: string;
-  timezone_abbreviation: string;
-  elevation: number;
+export interface WeatherData {
+  location: Location;
+  wmo_code_description: string;
   current_units: CurrentUnits;
   current: Current;
   daily_units: DailyUnits;

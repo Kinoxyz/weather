@@ -4,18 +4,14 @@
     import Footer from "./components/Footer.svelte";
     import {invoke} from "@tauri-apps/api/tauri";
     import SettingsButton from "./components/SettingsButton.svelte";
+	import CurrentLocationDisplay from "./components/CurrentLocationDisplay.svelte";
 
     let weatherData: any = {};
-    let wmoCodeDescription = "";
-    let location = "";
+    let locationInput = "";
 
     async function fetchWeatherData(location: string) {
         weatherData = await invoke("get_weather_data", {location});
         console.log(weatherData);
-        let wmoCode = weatherData?.current.weathercode;
-        wmoCodeDescription = await invoke("get_wmo_code_description", {
-            code: wmoCode,
-        });
     }
 </script>
 
@@ -23,10 +19,13 @@
     <main class="container">
         <SettingsButton/>
         <div class="row">
-            <LocationInputField {fetchWeatherData} {location}/>
+            <LocationInputField {fetchWeatherData} {locationInput}/>
         </div>
         <div class="row">
-            <WeatherCard data={weatherData} {wmoCodeDescription}/>
+            <CurrentLocationDisplay data={weatherData}/>
+        </div>
+        <div class="row">
+            <WeatherCard data={weatherData}/>
         </div>
     </main>
     <Footer/>

@@ -28,9 +28,8 @@ pub struct HourlyUnits {
     temperature_2_m: String,
 }
 
-#[derive(Serialize, Deserialize, TS)]
-#[ts(export, export_to = "../src/bindings/")]
-pub struct CurrentWeatherResponse {
+#[derive(Serialize, Deserialize)]
+pub struct WeatherApiResponse {
     latitude: f64,
     longitude: f64,
     generationtime_ms: f64,
@@ -38,10 +37,49 @@ pub struct CurrentWeatherResponse {
     timezone: String,
     timezone_abbreviation: String,
     elevation: f64,
-    current_units: CurrentUnits,
-    current: Current,
-    daily_units: DailyUnits,
-    daily: Daily
+    pub current_units: CurrentUnits,
+    pub current: Current,
+    pub daily_units: DailyUnits,
+    pub daily: Daily
+}
+
+#[derive(Serialize, Deserialize, TS)]
+#[ts(export, export_to = "../src/bindings/")]
+pub struct Location {
+    pub name: String,
+    pub country: String
+}
+
+#[derive(Serialize, Deserialize, TS)]
+#[ts(export, export_to = "../src/bindings/")]
+pub struct WeatherData {
+    pub location: Location,
+    pub wmo_code_description: String, 
+    pub current_units: CurrentUnits,
+    pub current: Current,
+    pub daily_units: DailyUnits,
+    pub daily: Daily,
+}
+
+impl WeatherData {
+    pub fn new(
+        weather_api_response: WeatherApiResponse,
+        geocoding_result: crate::models::geocoding::GeocodingResult
+    ) -> WeatherData {
+        use crate::models::wmo_code::get_wmo_code_description;
+
+        WeatherData {
+            location: Location {
+                name: geocoding_result.name,
+                country: geocoding_result.country
+            },
+            wmo_code_description: get_wmo_code_description(weather_api_response.current.weathercode),
+            current_units: weather_api_response.current_units,
+            current: weather_api_response.current,
+            daily_units: weather_api_response.daily_units,
+            daily: weather_api_response.daily
+        }
+    }
 }
 
 #[derive(Serialize, Deserialize, TS)]
@@ -65,7 +103,7 @@ pub struct Current {
     temperature_2_m: f64,
     #[serde(rename = "windspeed_10m")]
     windspeed_10_m: f64,
-    weathercode: f64
+    pub weathercode: i32
 }
 
 #[derive(Serialize, Deserialize, TS)]
