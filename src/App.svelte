@@ -10,7 +10,7 @@
     let locationInput = "";
 
     async function fetchWeatherData(location: string) {
-        let weatherData = await invoke("get_weather_data", {location});
+        weatherData = await invoke("get_weather_data", {location});
         console.log(weatherData);
     }
 </script>
