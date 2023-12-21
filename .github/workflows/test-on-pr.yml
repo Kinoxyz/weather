@@ -11,16 +11,17 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v3
-      - name: setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
       - name: Rust cache
         uses: swatinem/rust-cache@v2
         with:
-          workspaces: './src-tauri -> target'  
+          workspaces: './src-tauri -> target'
+      - name: Sync node version and setup pnpm cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'pnpm'
       - name: install pnpm
         uses: pnpm/action-setup@v2
         with:
