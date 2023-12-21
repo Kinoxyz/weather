@@ -17,6 +17,10 @@ jobs:
           node-version: 16
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'  
       - name: install pnpm
         uses: pnpm/action-setup@v2
         with:
