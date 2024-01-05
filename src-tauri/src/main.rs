@@ -6,12 +6,29 @@ pub mod models;
 
 use crate::api::weather_api::fetch_basic_weather_data;
 use crate::models::weather_response::WeatherData;
+use crate::api::errors;
 
 #[tauri::command]
 async fn get_weather_data(_location: &str) -> Result<WeatherData, String> {
-    let Ok(geocoding_result) = api::geocoding::get_coordinates(_location).await else {
-        return Err(_location.to_string() + " is not a valid location");
+    let geocoding_result = match api::geocoding::get_coordinates(_location).await {
+        Ok(result) => result,
+        Err(e) => {
+            return match e {
+                errors::GeoCodingError::NetworkError => {
+                    Err(e.to_string() + ".Please try again.")
+                },
+                errors::GeoCodingError::InvalidLocationError => {
+                    println!("Error: {} is not a valid location", _location);
+                    Err(_location.to_string() + " is not a valid location")
+                },
+                _ => {
+                    println!("Error: {}", e);
+                    Err("An error occurred".to_string())
+                }
+            }
+        }
     };
+    
     let data = fetch_basic_weather_data(&geocoding_result).await;
     match data {
         Ok(response) => {
