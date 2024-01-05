@@ -8,9 +8,9 @@ use crate::api::weather_api::fetch_basic_weather_data;
 use crate::models::weather_response::WeatherData;
 
 #[tauri::command]
-async fn get_weather_data(_location: &str) -> Result<WeatherData, ()> {
+async fn get_weather_data(_location: &str) -> Result<WeatherData, String> {
     let Ok(geocoding_result) = api::geocoding::get_coordinates(_location).await else {
-        return Err(());
+        return Err(_location.to_string() + " is not a valid location");
     };
     let data = fetch_basic_weather_data(&geocoding_result).await;
     match data {
@@ -19,7 +19,7 @@ async fn get_weather_data(_location: &str) -> Result<WeatherData, ()> {
         },
         Err(error) => {
             eprintln!("{error}");
-            Err(())
+            Err("Invalid weather data".to_string())
         }
     }
 }
