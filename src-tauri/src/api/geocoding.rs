@@ -14,7 +14,7 @@ fn construct_api_url(location: &str) -> String {
 }
 
 pub async fn get_coordinates(location: &str) -> Result<GeocodingResult> {
-    let api_url = construct_api_url(location);
+    let api_url = construct_api_url(location.trim());
 
     let response = reqwest::get(api_url)
         .await?
