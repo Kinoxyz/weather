@@ -18,16 +18,14 @@ pub async fn get_coordinates(location: &str) -> Result<GeocodingResult, errors::
 
     let response = match reqwest::get(api_url).await {
         Ok(resp) => resp,
-        Err(e) => {
-            println!("Error occurred while making the request: {}", e);
+        Err(_e) => {
             return Err(errors::GeoCodingError::NetworkError);
         }
     };
 
     let mut geocoding_response = match response.json::<GeocodingResponse>().await {
         Ok(resp) => resp,
-        Err(e) => {
-            println!("Error occurred while parsing the response: {}", e);
+        Err(_e) => {
             return Err(errors::GeoCodingError::InvalidLocationError);
         }
     };
@@ -35,7 +33,6 @@ pub async fn get_coordinates(location: &str) -> Result<GeocodingResult, errors::
     match geocoding_response.results.pop() {
         Some(result) => Ok(result),
         None => {
-            println!("Error: Coordinates missing");
             Err(errors::GeoCodingError::MissingCoordinatesError)
         }
     }
