@@ -19,6 +19,7 @@ serde_json = "1.0"
 reqwest = { version = "0.11.22", features = ["json"] }
 ts-rs = { version = "7.0", features = ["format"] }
 anyhow = "1.0.75"
+thiserror = "1.0.57"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
