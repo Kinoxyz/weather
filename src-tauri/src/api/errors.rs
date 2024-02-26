@@ -1,7 +1,11 @@
-use custom_error::custom_error;
+use thiserror::Error;
 
-custom_error! {pub GeoCodingError
-    NetworkError = "No network connection",
-    InvalidLocationError= "Invalid location",
-    MissingCoordinatesError = "Coordinates missing"
+#[derive(Error, Debug)]
+pub enum GeoCodingError {
+    #[error("No network connection")]
+    NetworkError,
+    #[error("Invalid location")]
+    InvalidLocationError,
+    #[error("Coordinates missing")]
+    MissingCoordinatesError,
 }

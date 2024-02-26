@@ -15,15 +15,15 @@ async fn get_weather_data(_location: &str) -> Result<WeatherData, String> {
         Err(e) => {
             return match e {
                 errors::GeoCodingError::NetworkError => {
-                    Err(e.to_string() + ".Please try again.")
+                    Err(format!("{}.Please try again.", e))
                 },
                 errors::GeoCodingError::InvalidLocationError => {
-                    println!("Error: {} is not a valid location", _location);
-                    Err(_location.to_string() + " is not a valid location")
+                    eprintln!("Error: {} is not a valid location", _location);
+                    Err(format!("{} is not a valid location", e))
                 },
                 _ => {
-                    println!("Error: {}", e);
-                    Err("An error occurred".to_string())
+                    eprintln!("Error: {}", e);
+                    Err(format!("An error occurred"))
                 }
             }
         }
@@ -36,7 +36,7 @@ async fn get_weather_data(_location: &str) -> Result<WeatherData, String> {
         },
         Err(error) => {
             eprintln!("{error}");
-            Err("Invalid weather data".to_string())
+            Err(format!("Invalid weather data"))
         }
     }
 }
