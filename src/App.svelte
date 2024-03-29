@@ -8,10 +8,16 @@
 
     let weatherData: any = {};
     let locationInput = "";
+    let weatherDataError = "";
 
     async function fetchWeatherData(location: string) {
-        weatherData = await invoke("get_weather_data", {location});
-        console.log(weatherData);
+        weatherData = {};
+        weatherDataError="";
+        try {
+            weatherData = location.trim().length ? await invoke("get_weather_data", {location}) : {};
+        } catch (err: any) {
+            weatherDataError = err
+        }
     }
 </script>
 
@@ -22,7 +28,7 @@
             <LocationInputField {fetchWeatherData} {locationInput}/>
         </div>
         <div class="row">
-            <CurrentLocationDisplay data={weatherData}/>
+            <CurrentLocationDisplay data={weatherData} weatherDataError={weatherDataError}/>
         </div>
         <div class="row">
             <WeatherCard data={weatherData}/>
