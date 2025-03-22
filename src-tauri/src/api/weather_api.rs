@@ -25,9 +25,7 @@ fn construct_api_url(coordinates: &GeocodingResult) -> String {
     )
 }
 
-pub async fn fetch_basic_weather_data(
-    coordinates: &GeocodingResult,
-) -> Result<WeatherApiResponse> {
+pub async fn fetch_basic_weather_data(coordinates: &GeocodingResult) -> Result<WeatherApiResponse> {
     let api_url = construct_api_url(coordinates);
     let response = reqwest::get(api_url)
         .await?

@@ -1,5 +1,5 @@
-use ts_rs::TS;
 use serde::{Deserialize, Serialize};
+use ts_rs::TS;
 
 #[derive(Serialize, Deserialize)]
 pub struct ForecastWeatherResponse {
@@ -40,21 +40,21 @@ pub struct WeatherApiResponse {
     pub current_units: CurrentUnits,
     pub current: Current,
     pub daily_units: DailyUnits,
-    pub daily: Daily
+    pub daily: Daily,
 }
 
 #[derive(Serialize, Deserialize, TS)]
 #[ts(export, export_to = "../src/bindings/")]
 pub struct Location {
     pub name: String,
-    pub country: String
+    pub country: String,
 }
 
 #[derive(Serialize, Deserialize, TS)]
 #[ts(export, export_to = "../src/bindings/")]
 pub struct WeatherData {
     pub location: Location,
-    pub wmo_code_description: String, 
+    pub wmo_code_description: String,
     pub current_units: CurrentUnits,
     pub current: Current,
     pub daily_units: DailyUnits,
@@ -64,20 +64,22 @@ pub struct WeatherData {
 impl WeatherData {
     pub fn new(
         weather_api_response: WeatherApiResponse,
-        geocoding_result: crate::models::geocoding::GeocodingResult
+        geocoding_result: crate::models::geocoding::GeocodingResult,
     ) -> WeatherData {
         use crate::models::wmo_code::get_wmo_code_description;
 
         WeatherData {
             location: Location {
                 name: geocoding_result.name,
-                country: geocoding_result.country
+                country: geocoding_result.country,
             },
-            wmo_code_description: get_wmo_code_description(weather_api_response.current.weathercode),
+            wmo_code_description: get_wmo_code_description(
+                weather_api_response.current.weathercode,
+            ),
             current_units: weather_api_response.current_units,
             current: weather_api_response.current,
             daily_units: weather_api_response.daily_units,
-            daily: weather_api_response.daily
+            daily: weather_api_response.daily,
         }
     }
 }
@@ -91,7 +93,7 @@ pub struct CurrentUnits {
     temperature_2_m: String,
     #[serde(rename = "windspeed_10m")]
     windspeed_10_m: String,
-    weathercode: String
+    weathercode: String,
 }
 
 #[derive(Serialize, Deserialize, TS)]
@@ -103,7 +105,7 @@ pub struct Current {
     temperature_2_m: f64,
     #[serde(rename = "windspeed_10m")]
     windspeed_10_m: f64,
-    pub weathercode: i32
+    pub weathercode: i32,
 }
 
 #[derive(Serialize, Deserialize, TS)]
@@ -113,7 +115,7 @@ pub struct DailyUnits {
     #[serde(rename = "temperature_2m_max")]
     temperature_2_m_max: String,
     #[serde(rename = "temperature_2m_min")]
-    temperature_2_m_min: String
+    temperature_2_m_min: String,
 }
 
 #[derive(Serialize, Deserialize, TS)]
@@ -123,5 +125,5 @@ pub struct Daily {
     #[serde(rename = "temperature_2m_max")]
     temperature_2_m_max: Vec<f64>,
     #[serde(rename = "temperature_2m_min")]
-    temperature_2_m_min: Vec<f64>
+    temperature_2_m_min: Vec<f64>,
 }
