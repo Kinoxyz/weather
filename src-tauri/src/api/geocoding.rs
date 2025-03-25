@@ -1,7 +1,7 @@
 use anyhow::Result;
 
-use crate::models::geocoding::{GeocodingResponse, GeocodingResult};
 use crate::api::errors;
+use crate::models::geocoding::{GeocodingResponse, GeocodingResult};
 
 fn construct_api_url(location: &str) -> String {
     format!(
@@ -32,9 +32,6 @@ pub async fn get_coordinates(location: &str) -> Result<GeocodingResult, errors::
 
     match geocoding_response.results.pop() {
         Some(result) => Ok(result),
-        None => {
-            Err(errors::GeoCodingError::MissingCoordinatesError)
-        }
+        None => Err(errors::GeoCodingError::MissingCoordinatesError),
     }
 }
-
