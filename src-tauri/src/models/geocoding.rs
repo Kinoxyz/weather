@@ -12,5 +12,5 @@ pub struct GeocodingResult {
     pub latitude: f64,
     pub longitude: f64,
     pub name: String,
-    pub country: String
+    pub country: String,
 }

@@ -1,45 +1,39 @@
 {
-    "build": {
-        "beforeDevCommand": "pnpm dev",
-        "beforeBuildCommand": "pnpm build",
-        "devPath": "http://localhost:1420",
-        "distDir": "../dist",
-        "withGlobalTauri": false
-    },
-    "package": {
-        "productName": "Weather",
-        "version": "1.0.0"
-    },
-    "tauri": {
-        "allowlist": {
-            "all": false,
-            "shell": {
-                "all": false,
-                "open": true
-            }
-        },
-        "bundle": {
-            "active": true,
-            "targets": "all",
-            "identifier": "com.kinoxyz.weather",
-            "icon": [
-                "icons/32x32.png",
-                "icons/128x128.png",
-                "icons/128x128@2x.png",
-                "icons/icon.icns",
-                "icons/icon.ico"
-            ]
-        },
-        "security": {
-            "csp": null
-        },
-        "windows": [
-            {
-                "fullscreen": false,
-                "width": 800,
-                "height": 650,
-                "title": "Weather"
-            }
-        ]
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420"
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  },
+  "productName": "Weather",
+  "mainBinaryName": "Weather",
+  "version": "1.0.0",
+  "identifier": "com.kinoxyz.weather",
+  "plugins": {},
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [
+      {
+        "fullscreen": false,
+        "width": 800,
+        "height": 650,
+        "title": "Weather",
+        "useHttpsScheme": true
+      }
+    ],
+    "security": {
+      "csp": null
     }
+  }
 }

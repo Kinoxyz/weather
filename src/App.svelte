@@ -2,7 +2,7 @@
     import LocationInputField from "./components/LocationInputField.svelte";
     import WeatherCard from "./components/WeatherCard.svelte";
     import Footer from "./components/Footer.svelte";
-    import {invoke} from "@tauri-apps/api/tauri";
+    import {invoke} from "@tauri-apps/api/core";
     import SettingsButton from "./components/SettingsButton.svelte";
 	import CurrentLocationDisplay from "./components/CurrentLocationDisplay.svelte";
 
